@@ -1,0 +1,57 @@
+Zadatak za vezbu:
+
+Stranica - index.html
+
+1. 
+	Validirati polja forme (ime i prezime) tako da se ne moze odraditi submit dok se oni ne popune.
+2. 
+	Pocetno slovo imena i prezimena mora biti veliko
+3. 
+	Inicijalno je "Membership" select onemogucen (disabled). Klikom na checkbox "Premium" omoguciti pomenuti select.
+	Takodje, ukoliko se checkbox "Premium" klikne opet, onemoguciti select.
+4. 
+	Pozadina Submit dugmeta je inicijalno bela, dok "Premium" checkbox nije stikliran, nakon stikliranja checkboxa promeniti pozadinu dugmeta u skladu sa odabranom opcijom na selectu.
+	Ukoliko je odabrana opcija:
+		Silver   -> pozadina treba da je : "silver"
+		Gold 	 -> pozadina treba da je : "gold"
+		Platinum -> pozadina treba da je : "skyblue"
+5. 
+	Ukoliko se checkbox odstiklira, vratiti pozadinu na belu boju.
+
+Stranica - next.html
+
+6.
+	Prilikom ucitavanja stranice pokupiti iz search-a parametre forme. Formirati recnik koji za kljuceve i njihove vrednosti ima parametre forme. Npr:
+		?ime=Pera&prezime=Peric&status=Premium&klasa=1
+		recnik bi bio 
+		recnik = {
+			"ime": "Pera",
+			"prezime" : "Peric",
+			"status" : "Premium",
+			"klasa" : "1" 
+		};
+7.
+	Dobaviti h1 tag sa id-om "welcome_user" i u njega upisati vrednosti iz recnika, npr:
+		"Hello, Pera Peric"
+8.
+	Dobaviti h4 tag sa id-om "premium_member" i u njega upisati, npr:
+		"You are our premium member, with Silver membership!"
+	Gde je Silver promenljivo, odnosno ako je gold member pisace Gold, itd. Obratiti paznju ukoliko nije stikliran checkbox "Premium", ovaj tag ne treba biti popunjen, odnosno "status" parametar se nece slati na sledecu stranicu 
+9.
+	Na stranici next.html nalaze se objekti sa informacijama o nekim destinacijama, koji su ubaceni u listu destinations.
+	Prilikom ucitavanja stranice, potrebno je popuniti select sa id-om: "sel1" sa informacijama o tim destinacijama.
+	Npr, ukoliko hocemo da dodamo informaciju u sel1, to mozemo uraditi na sledeci nacin:
+	sel1.options[sel1.options.length] = new Option("Text", "Value");
+	Obratiti paznju da svaka destinacija ima atribut type, koji moze biti ordinary, silver, gold, platinum.
+	Dakle, ako je korisnik na prethodnoj stranici odabrano da je korisnik silver, on ima pristup destinacijama ordinary i silver.
+	Za gold ima pristup ordinary, silver i gold. Na kraju za platinum ima pristup svim destinacijama.
+	Ukoliko na prethodnoj stranici nije cekirano premium prikazati samo ordinary destinacije.
+10.
+	U selectu sel1, sada je moguce odabrati odredjene destinacije. Kada korisnik odabere neku od dozvoljenih destinacija i klikne na 
+	dugme submit, potrebno je pararagraf sa id-om: "paragraph" popuniti sa informacijom o ceni karte do te destinacije.
+	Npr:
+		Price for your selected destination is 4500.
+
+
+
+

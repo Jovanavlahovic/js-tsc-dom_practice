@@ -1,0 +1,195 @@
+<html>
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<style>
+	  	.affix {
+	      	top: 0;
+	    	  width: 100%;
+	  	}
+
+	  	.affix + .container-fluid {
+	      padding-top: 70px;
+	  	}
+	  	.redText {
+	  		color: red;
+	  	}
+
+		.submitbtn {
+			background-color: white;
+		}
+		  
+  </style>
+
+  <script>
+
+    var dest1 = {
+      "name" : "beograd",
+      "price" : 1500,
+      "type" : "ordinary"  
+    };
+
+    var dest2 = {
+      "name" : "vienna",
+      "price" : 2500,
+      "type" : "ordinary"  
+    };
+
+    var dest3 = {
+      "name" : "budapest",
+      "price" : 1800,
+      "type" : "ordinary"  
+    };
+
+    var dest4 = {
+      "name" : "london",
+      "price" : 3500,
+      "type" : "silver"  
+    };
+
+    var dest5 = {
+      "name" : "madrid",
+      "price" : 1500,
+      "type" : "silver"  
+    };
+
+    var dest6 = {
+      "name" : "moscow",
+      "price" : 3500,
+      "type" : "gold"  
+    };
+
+    var dest7 = {
+      "name" : "rome",
+      "price" : 3900,
+      "type" : "gold"  
+    };
+
+    var dest8 = {
+      "name" : "Tokyo",
+      "price" : 4500,
+      "type" : "platinum"  
+    };
+
+    var dest9 = {
+      "name" : "new york",
+      "price" : 4800,
+      "type" : "platinum"  
+    };
+
+    var destinations = [];
+    destinations.push(dest1);
+    destinations.push(dest2);
+    destinations.push(dest3);
+    destinations.push(dest4);
+    destinations.push(dest5);
+    destinations.push(dest6);
+    destinations.push(dest7);
+    destinations.push(dest8);
+    destinations.push(dest9);
+
+
+    window.onload = function(){
+      var search = window.location.search;
+
+      var podaci = search.substring(1).split("&");
+      var recnik = {};
+      podaci.forEach(el => {
+        var temp = el.split("=");
+        recnik[temp[0]] = temp[1];
+      });
+      
+      var welcome = document.getElementById("welcome_user");
+      welcome.innerHTML = `Welcome, ${recnik.ime} ${recnik.prezime}!`;
+      var premium = document.getElementById("premium_member");
+
+      if(recnik.status){
+        premium.innerHTML = `You are our premium member, with ${odrediKlasu(recnik.klasa)} membership!`
+      }
+
+      var sel1 = document.getElementById("sel1");
+      var klasa = odrediKlasu(recnik.klasa);
+
+      if(recnik.klasa){
+          for(var i = 0; i < destinations.length; i++){
+          var destination = destinations[i];
+          if((klasa == "Silver" || klasa == "Gold" || klasa == "Platinum") && (destination.type == "silver" || destination.type == "ordinary")){
+            sel1.options[sel1.options.length] = new Option (destination.name, destination.name);
+          }
+          if((klasa == "Gold" || klasa == "Platinum") && (destination.type == "gold")){
+            sel1.options[sel1.options.length] = new Option (destination.name, destination.name);
+          }
+          if((klasa == "Platinum") && (destination.type == "platinum")){
+            sel1.options[sel1.options.length] = new Option (destination.name, destination.name);
+          }
+        }
+      } else {
+        for(var i in destinations){
+          if(destinations[i].type == "ordinary"){
+            sel1.options[sel1.options.length] = new Option (destinations[i].name, destinations[i].name);
+          }
+        }
+      } 
+      
+      
+      
+    };
+
+    function odrediKlasu(numb){
+      if(numb == 1){
+        return "Silver";
+      } else if(numb == 2){
+        return "Gold";
+      } else {
+        return "Platinum";
+      }
+    }
+
+    function calculate(){
+        var p = document.getElementById("paragraph");
+        for(var i in destinations){
+          if(destinations[i].name == sel1.value
+          ){
+            p.innerHTML = "Price for choosen destination is: " + destinations[i].price;
+          }
+        }
+        
+
+      }
+    
+  </script>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Test</a>
+    </div>
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">Forma</a></li>
+  </ul>
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form role="form">
+            <div class="starter-template">
+              <h1 id="welcome_user"></h1>
+              <h4 id="premium_member"></h4>
+            </div>
+					<div class="form-group">
+						<label for="sel1">Your possible destinations are:</label>
+						<select name="klasa" class="form-control" id="sel1">
+            </select>
+            <p class="lead" id="paragraph"></p>
+            
+					</div>		  			  		
+		  			<button type="button" class="btn btn-default col-md-4 pull-right submitbtn" id="submitbtn" onclick="calculate()">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
